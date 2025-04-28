@@ -45,7 +45,7 @@
         <br>
 
 
-        <input type="submit" value="add">
+        <input class="btn btn-success" type="submit" value="add">
 
     </form>
 
@@ -83,13 +83,13 @@
                         <input type="text" name="image" value="${c.linkImages}">
                     </td>
                     <td>
-                        <input type="submit" value="update">
+                        <input class="btn btn-success" type="submit" value="update">
                     </td>
                     </form>
                     <form method="post" action="/deleteCategoryFromList">
                     <td>
                         <input type="hidden" name="id1" value="${c.id}">
-                        <input type="submit" value="delete">
+                        <input class="btn btn-success" type="submit" value="delete">
                     </td>
                     </form>
                 </tr>
@@ -103,7 +103,7 @@
     <h1> Видалення всіх категорій </h1>
 
     <form method="post" action="/deleteAllCategory">
-        <input type="submit" value="deleteAll">
+        <input class="btn btn-success" type="submit" value="deleteAll">
     </form>
 
 

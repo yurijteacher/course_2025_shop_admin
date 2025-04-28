@@ -9,12 +9,12 @@ import ua.com.kneu.course.entity.Categories;
 import ua.com.kneu.course.service.CategoryService;
 
 @Controller
-public class CategoryManager {
+public class CategoryManagerController {
 
     private final CategoryService categoryService;
 
 
-    public CategoryManager(CategoryService categoryService) {
+    public CategoryManagerController(CategoryService categoryService) {
         this.categoryService = categoryService;
     }
 
