@@ -2,6 +2,7 @@ package ua.com.kneu.course.controller;
 
 
 import lombok.Getter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -58,13 +59,14 @@ public class ClientAdminController {
 
         Clients client1 = clientService.getClientByUsername(username);
 
-        if (client1 == null) {
+//        if (client1 == null) {
             client.setUsername(username);
-            client.setPassword(password);
+
+            client.setPassword(new BCryptPasswordEncoder().encode(password));
             clientService.saveNewClient(client);
-        } else {
+//        } else {
             // ...
-        }
+//        }
 
         return "redirect:/admin/list-client";
     }
