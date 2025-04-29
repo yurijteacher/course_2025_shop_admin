@@ -54,7 +54,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/manager", "/manager/**").hasAuthority("ROLE_MANAGER")
                         .requestMatchers("/admin", "/admin/**").hasAuthority("ROLE_ADMIN")
                         .anyRequest()
-                        .permitAll()
+                        .authenticated()
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
