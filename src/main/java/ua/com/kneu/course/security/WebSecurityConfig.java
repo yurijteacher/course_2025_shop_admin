@@ -42,28 +42,29 @@ public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain apiFilterChain(HttpSecurity http) throws Exception {
-
         http
-                .csrf((csrf) ->
-                        csrf.disable())
-                .authorizeHttpRequests((authorize) ->
-                        authorize
-                                .requestMatchers("/", "/login", "registration", "/logout")
-                                .permitAll()
-                                .requestMatchers("/manager", "/manager/**")
-                                .hasRole("manager")
-                                .requestMatchers("/admin", "/admin/**")
-                                .hasRole("admin")
-                                    .anyRequest()
-                                    .authenticated()
+                .csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/", "/login", "/registration", "/logout", "/static/**",
+                                "/categories", "/delivery", "/payment", "/about-us",
+                                "/cart", "/category/**", "/list_card",
+                                "/addToCart", "/updateItemFromCart", "/deleteItemFromCart", "/deleteAllItemFromCart"
+                        ).permitAll()
+                        .requestMatchers("/order", "/thank", "/order/**").hasAuthority("ROLE_USER")
+                        .requestMatchers("/manager", "/manager/**").hasAuthority("ROLE_MANAGER")
+                        .requestMatchers("/admin", "/admin/**").hasAuthority("ROLE_ADMIN")
+                        .anyRequest()
+                        .permitAll()
                 )
-                .formLogin((form) -> form
+                .formLogin(form -> form
                         .loginPage("/login")
                         .defaultSuccessUrl("/")
-                        .permitAll())
-                .logout((logout) -> logout
                         .permitAll()
-                        .logoutSuccessUrl("/"))
+                )
+                .logout(logout -> logout
+                        .permitAll()
+                        .logoutSuccessUrl("/")
+                )
                 .authenticationProvider(authenticationProvider());
 
         return http.build();

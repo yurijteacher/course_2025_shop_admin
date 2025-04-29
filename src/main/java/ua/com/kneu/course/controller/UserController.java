@@ -72,7 +72,7 @@ public class UserController {
 
         Clients clients = clientService.saveNewClient(client);
 
-        clients.setRolesset(Collections.singleton(new Roles(1L, "ROLE_user")));
+        clients.setRolesset(Collections.singleton(new Roles(1L, "ROLE_USER")));
 
         customer.setClient(clients);
 

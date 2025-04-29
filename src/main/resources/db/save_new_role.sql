@@ -1,3 +1,3 @@
-INSERT INTO `_roles` (`name`) VALUES ('ROLE_user');
-INSERT INTO `_roles` (`name`) VALUES ('ROLE_manager');
-INSERT INTO `_roles` (`name`) VALUES ('ROLE_admin');
+INSERT INTO `roles` (`name`) VALUES ('ROLE_user');
+INSERT INTO `roles` (`name`) VALUES ('ROLE_manager');
+INSERT INTO `roles` (`name`) VALUES ('ROLE_admin');

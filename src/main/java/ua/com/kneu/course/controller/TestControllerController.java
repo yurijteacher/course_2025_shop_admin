@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class TestControllerController {
 
-    @GetMapping("/test")
-    public String getTestPage(Model model){
-        return "index";
-    }
+//    @GetMapping("/test")
+//    public String getTestPage(Model model){
+//        return "index";
+//    }
 
     @GetMapping("/admin")
     public String getAdminPage(Model model){
