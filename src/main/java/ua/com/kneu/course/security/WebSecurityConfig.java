@@ -55,6 +55,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/admin", "/admin/**").hasAuthority("ROLE_ADMIN")
                         .anyRequest()
                         .authenticated()
+
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
@@ -64,6 +65,9 @@ public class WebSecurityConfig {
                 .logout(logout -> logout
                         .permitAll()
                         .logoutSuccessUrl("/")
+                )
+                .exceptionHandling(exception -> exception
+                        .accessDeniedPage("/403")
                 )
                 .authenticationProvider(authenticationProvider());
 

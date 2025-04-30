@@ -1,12 +1,10 @@
 package ua.com.kneu.course.controller;
 
 
-import lombok.Getter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ua.com.kneu.course.entity.Clients;
@@ -15,7 +13,6 @@ import ua.com.kneu.course.repository.ClientsRepository;
 import ua.com.kneu.course.service.ClientService;
 import ua.com.kneu.course.service.CustomerService;
 
-import java.util.HashSet;
 import java.util.Set;
 
 @Controller
