@@ -26,6 +26,15 @@
         </tbody>
     </table>
 
+    <hr>
+    <h4> Запис з файла Excel</h4>
+
+    <form action="/saveFromExcel" method="post" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <button type="submit">add</button>
+    </form>
+
+
     <br>
     <hr>
     <h1> Додавання нового каталогу продукції </h1>

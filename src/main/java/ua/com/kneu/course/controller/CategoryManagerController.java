@@ -5,17 +5,27 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import ua.com.kneu.course.entity.Categories;
 import ua.com.kneu.course.service.CategoryService;
+import ua.com.kneu.course.service.SaveCategoryToDBFromExcel;
+import ua.com.kneu.course.validation.Valid;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class CategoryManagerController {
 
     private final CategoryService categoryService;
+    private final SaveCategoryToDBFromExcel saveCategoryToDBFromExcel;
 
 
-    public CategoryManagerController(CategoryService categoryService) {
+    public CategoryManagerController(CategoryService categoryService, SaveCategoryToDBFromExcel saveCategoryToDBFromExcel) {
         this.categoryService = categoryService;
+        this.saveCategoryToDBFromExcel = saveCategoryToDBFromExcel;
     }
 
     @GetMapping("/manager/categories")
@@ -70,6 +80,31 @@ public class CategoryManagerController {
     @PostMapping("/deleteAllCategory")
     public String deleteAllCategory() {
         categoryService.deleteAll();
+        return "redirect:/manager/categories";
+    }
+
+
+
+    @PostMapping("saveFromExcel")
+    public String saveCategoryToDbFromExcel(@RequestParam("file") MultipartFile file) {
+
+        List<Categories> categories = new ArrayList<>();
+        if (file != null && !file.getOriginalFilename().isEmpty()) {
+
+            Valid valid = new Valid();
+            try (InputStream is = file.getInputStream()) {
+                if (valid.logicXLS(file.getOriginalFilename())) {
+                    categories = saveCategoryToDBFromExcel.saveListCategoryToDbFromExcel(is);
+                    categoryService.saveCategories(categories);
+                } else if (valid.logicXLSX(file.getOriginalFilename())) {
+                    categories = saveCategoryToDBFromExcel.saveListCategoryToDbFromExcel2(is);
+                    categoryService.saveCategories(categories);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                // Обробка винятків
+            }
+        }
         return "redirect:/manager/categories";
     }
 
